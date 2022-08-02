@@ -38,6 +38,7 @@ button {
     padding: var(--xl-size) 0px;
     box-shadow: 0px 2px 2px black;
     width: 100%;
+    letter-spacing: 5px;
 }
 
 /* PLUS ICON */
@@ -67,12 +68,13 @@ button {
 /* MODAL */
 .modal-overlay {
     visibility: none;
-    position: fixed;
+    position: absolute;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
     background-color: rgba(0, 0, 0, 0.5);
+    width: 100%;
 }
 
 .modal-container {
@@ -103,7 +105,7 @@ label {
     font-size: 1rem;
 }
 
-.add-book-btn {
+#add-book-btn {
     width: 100%;
     display: flex;
     justify-content: center;
@@ -114,7 +116,7 @@ label {
     border: solid var(--main-tertiary-color) 2px;
     background-color: transparent;
 }
-.add-book-btn:hover {
+#add-book-btn:hover {
     background-color: var(--main-tertiary-color);
     color: white;
 }
@@ -151,4 +153,23 @@ label {
 .author {
     font-style: italic;
     margin-bottom: var(--s-size);
+}
+.card-btn {
+    margin-top: var(--s-size);
+    border: none;
+    padding: 10px;
+    font-size: 1.2rem;
+    color: white;
+}
+.card-close-btn {
+    background-color: #ab3232;;
+}
+.card-close-btn:hover {
+    background-color: #8a2828;
+}
+.has-read-btn {
+    background-color: #32ab42;
+}
+.has-not-read-btn {
+    background-color: #b37320;
 }
