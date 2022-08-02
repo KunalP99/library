@@ -37,6 +37,7 @@ button {
     align-items: center;
     padding: var(--xl-size) 0px;
     box-shadow: 0px 2px 2px black;
+    width: 100%;
 }
 
 /* PLUS ICON */
@@ -51,8 +52,13 @@ button {
     width: var(--xl-size);
 }
 #plus-btn {
+    position: fixed;
+    bottom: 0;
+    right: 0;
     border: none;
     background-color: transparent;
+    margin-top: var(--m-size);
+    padding: 10px;
 }
 #plus-icon:hover {
     width: 70px;
@@ -61,7 +67,6 @@ button {
 /* MODAL */
 .modal-overlay {
     visibility: none;
-    width: 100%;
     position: fixed;
     display: flex;
     justify-content: center;
@@ -112,4 +117,38 @@ label {
 .add-book-btn:hover {
     background-color: var(--main-tertiary-color);
     color: white;
+}
+
+/* CARD CONTAINER */
+.cards-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+    grid-auto-rows: 1fr;
+    gap: var(--xl-size);
+    justify-items: center;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    width: 500px;
+    padding: 40px;
+    background-color: white;
+    border: solid var(--main-tertiary-color) 5px;
+    border-radius: 10px;
+    text-align: center;
+}
+.card h3 {
+    font-size: 3rem;
+    text-align: center;
+    margin-bottom: var(--s-size);
+    overflow-wrap: break-word;
+}
+.card p {
+    font-size: 1.25rem;
+    overflow-wrap: break-word;
+}
+.author {
+    font-style: italic;
+    margin-bottom: var(--s-size);
 }
