@@ -34,20 +34,33 @@ addBookBtn.addEventListener('click', () => {
         console.log('error');
         return 'error';
     } else {
+        // Making the input equal the value if all the input fields are filled in
         titleInput = titleValue;
         authorInput = authorValue;
         pagesInput = pagesValue;
         hasReadInput = document.getElementById('hasRead').value;
+
+        // Creating a Book object using a constructor, adding the object into the myLibrary array 
+        let book = new Book (titleInput, authorInput, pagesInput, hasReadInput);
+        myLibrary.push(book);
+
+        // Pass the myLibrary array into a function that will display the book 
+        displayBook(myLibrary);
     }
-        console.log(titleInput, authorInput, pagesInput, hasReadInput);
+
+    // Empty the input fields and close modal once this button is clicked only if there values in the input fields
 });
 
-const displayBook = () => {
-
+const displayBook = (libArray) => {
+    // DOM Manipulation 
+    console.log(libArray);
 }
 
-function Book() {
-    
+ function Book(title, author, pages, hasRead) {
+    this.title = title;
+    this.author = author;
+    this.pages = pages;
+    this.hasRead = hasRead;
 }
 
 const addBookToLibrary = () => {
