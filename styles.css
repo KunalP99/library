@@ -4,6 +4,7 @@
     /* COLOURS */
     --main-primary-color: #3F4E4F;
     --main-secondary-color: #2C3639;
+    --main-tertiary-color: #4F403F;
 
     /* SIZING */
     --xs-size: 5px;
@@ -38,6 +39,7 @@ button {
     box-shadow: 0px 2px 2px black;
 }
 
+/* PLUS ICON */
 .btn-container {
     display: flex;
     justify-content: center;
@@ -54,4 +56,60 @@ button {
 }
 #plus-icon:hover {
     width: 70px;
+}
+
+/* MODAL */
+.modal-overlay {
+    visibility: none;
+    width: 100%;
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-container {
+    background-color: white;
+    width: 300px;
+    height: 500px;
+    padding: var(--xl-size);
+    border: solid var(--main-tertiary-color) 5px;
+    border-radius: 10px;
+}
+.modal-container h3 {
+    font-size: 1.3rem;
+}
+
+/* FORM IN MODAL */
+.close-btn {
+    border: none;
+    background-color: transparent;
+    float: right;
+}
+.close-btn img {
+    width: var(--m-size);
+}
+label {
+    display: block;
+    padding-top: var(--l-size);
+    padding-bottom: var(--xs-size);
+    font-size: 1rem;
+}
+
+.add-book-btn {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: var(--l-size);
+    padding: var(--s-size);
+    font-size: 1rem;
+    border: solid var(--main-tertiary-color) 2px;
+    background-color: transparent;
+}
+.add-book-btn:hover {
+    background-color: var(--main-tertiary-color);
+    color: white;
 }

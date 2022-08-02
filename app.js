@@ -12,7 +12,19 @@ let myLibrary = [{
 }];
 
 const cardsContainer = document.querySelector('.cards-container');
-console.log(cardsContainer);
+const modalOverlay = document.querySelector('.modal-overlay');
+const addBtn = document.getElementById('plus-btn');
+
+// Displays the modal overlay 
+addBtn.addEventListener('click', () => {
+    modalOverlay.style.visibility = "visible";
+});
+// Hides the modal overlay
+window.onclick = (e) => {
+    if(e.target == modalOverlay) {
+        modalOverlay.style.visibility = "hidden";
+    }
+};
 
 function Book() {
     
