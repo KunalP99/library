@@ -81,6 +81,8 @@ const displayBook = (libArray) => {
     let hasReadBtn = document.createElement('button');
     let removeBtn = document.createElement('button');
 
+    let i;
+
     removeBtn.innerText = 'Remove';
 
     // Add classes to the relevant elements
@@ -89,26 +91,55 @@ const displayBook = (libArray) => {
     hasReadBtn.classList.add('card-btn', 'card-read-btn');
     removeBtn.classList.add('card-btn', 'card-close-btn');
 
-    for (let i = 0; i < libArray.length; i++) {
+    for (i = 0; i < libArray.length; i++) {
         titleText.textContent = libArray[i].title;
         authorText.textContent = libArray[i].author;
         pagesText.textContent = `Pages: ${libArray[i].pages}`;
 
+        hasReadBtn.innerText = libArray[i].hasRead;
+
         if (libArray[i].hasRead === 'Have Read') {
+            hasReadBtn.classList.remove('has-not-read-btn');
             hasReadBtn.classList.add('has-read-btn');
         } else {
+            hasReadBtn.classList.remove('has-read-btn');
             hasReadBtn.classList.add('has-not-read-btn');
         }
-
-        hasReadBtn.innerText = libArray[i].hasRead;
     }
-    hasReadChange(hasReadBtn.innerText, hasReadBtn);
+
+    // Giving the cardDiv a unique ID - minus 1 so that it matches its position in the myLibrary array
+    cardDiv.dataset.id = `${i - 1}`;
+
+    // Changes the value of the hasRead btn if it is clicked 
+    hasReadBtn.addEventListener('click', () => toggleRead(hasReadBtn));
+    
     cardDiv.append(titleText, authorText, pagesText, hasReadBtn, removeBtn);
     cardsContainer.appendChild(cardDiv);
+
+    // Removes the card depending on their data-id attribute
+    removeBtn.addEventListener('click', () => {
+        removeCard(cardDiv);
+    });
 }
 
-const hasReadChange = (hasReadValue, hasReadBtn) => {
-    hasReadBtn.addEventListener('click', () => {
-        console.log('click');
-    });
+const toggleRead = (hasReadBtn) => {
+    if (hasReadBtn.innerText === 'Have Read') {
+        hasReadBtn.innerText = 'Have Not Read';
+        hasReadBtn.classList.remove('has-read-btn');
+        hasReadBtn.classList.add('has-not-read-btn');            
+    } else if (hasReadBtn.innerText === 'Have Not Read') {
+        hasReadBtn.innerText = 'Have Read';
+        hasReadBtn.classList.remove('has-not-read-btn');
+        hasReadBtn.classList.add('has-read-btn');
+    }
+}
+
+const removeCard = (card) => {
+    const id = card.dataset.id;
+
+    // Removing books from the array
+    myLibrary.splice(id, 1);
+    
+    // Removing card from the DOM
+    cardsContainer.removeChild(card);
 }
