@@ -25,7 +25,17 @@ window.onclick = (e) => {
     }
 };
 
-addBookBtn.addEventListener('click', () => {
+addBookBtn.addEventListener('click', () => addBookToLibrary());
+
+// Creates an object with the parameters set whenever called 
+ function Book(title, author, pages, hasRead) {
+    this.title = title;
+    this.author = author;
+    this.pages = pages;
+    this.hasRead = hasRead;
+}
+
+const addBookToLibrary = () => {
     let titleValue = document.getElementById('title').value;
     let authorValue = document.getElementById('author').value;
     let pagesValue = document.getElementById('pages').value;
@@ -40,30 +50,65 @@ addBookBtn.addEventListener('click', () => {
         pagesInput = pagesValue;
         hasReadInput = document.getElementById('hasRead').value;
 
+        // Changes the value for hasReadInput
+        switch(hasReadInput) {
+            case 'yes':
+                hasReadInput = 'Have Read';
+                break;
+            case 'no':
+                hasReadInput = 'Have Not Read';
+                break;
+        }
+
         // Creating a Book object using a constructor, adding the object into the myLibrary array 
         let book = new Book (titleInput, authorInput, pagesInput, hasReadInput);
         myLibrary.push(book);
 
         // Pass the myLibrary array into a function that will display the book 
         displayBook(myLibrary);
-    }
 
-    // Empty the input fields and close modal once this button is clicked only if there values in the input fields
-});
+        // Empty the input fields and close modal once this button is clicked
+        modalOverlay.style.visibility = "hidden";
+        form.reset();
+    }
+};
 
 const displayBook = (libArray) => {
-    // DOM Manipulation 
-    console.log(libArray);
+    let cardDiv = document.createElement('div');
+    let titleText = document.createElement('h3');
+    let authorText = document.createElement('p');
+    let pagesText = document.createElement('p');
+    let hasReadBtn = document.createElement('button');
+    let removeBtn = document.createElement('button');
+
+    removeBtn.innerText = 'Remove';
+
+    // Add classes to the relevant elements
+    cardDiv.classList.add('card');
+    authorText.classList.add('author');
+    hasReadBtn.classList.add('card-btn', 'card-read-btn');
+    removeBtn.classList.add('card-btn', 'card-close-btn');
+
+    for (let i = 0; i < libArray.length; i++) {
+        titleText.textContent = libArray[i].title;
+        authorText.textContent = libArray[i].author;
+        pagesText.textContent = `Pages: ${libArray[i].pages}`;
+
+        if (libArray[i].hasRead === 'Have Read') {
+            hasReadBtn.classList.add('has-read-btn');
+        } else {
+            hasReadBtn.classList.add('has-not-read-btn');
+        }
+
+        hasReadBtn.innerText = libArray[i].hasRead;
+    }
+    hasReadChange(hasReadBtn.innerText, hasReadBtn);
+    cardDiv.append(titleText, authorText, pagesText, hasReadBtn, removeBtn);
+    cardsContainer.appendChild(cardDiv);
 }
 
- function Book(title, author, pages, hasRead) {
-    this.title = title;
-    this.author = author;
-    this.pages = pages;
-    this.hasRead = hasRead;
+const hasReadChange = (hasReadValue, hasReadBtn) => {
+    hasReadBtn.addEventListener('click', () => {
+        console.log('click');
+    });
 }
-
-const addBookToLibrary = () => {
-    // Form Data
-    return Array.from(document.querySelectorAll('#book-form input')).reduce((acc, input) => ({ ...acc, [input.id] : input.value }), {});
-};
